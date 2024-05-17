@@ -1,0 +1,185 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+
+    <meta charset="utf-8">
+    <meta name="author" content="templatemo">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
+
+    <title>Payment</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="{% static 'vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+
+
+    <!-- Additional CSS Files -->
+    <link rel="stylesheet" href="{% static 'assets/css/fontawesome.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/templatemo-snapx-photography.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/owl.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/animate.css' %}">
+    <link rel="stylesheet"href="https://unpkg.com/swiper@7/swiper-bundle.min.css"/>
+
+    <!-- Libraries Stylesheet -->
+    <script src="{% static 'js_1/jquery2.0.3.min.js' %}"></script>
+
+
+    <link rel="stylesheet" href="{% static 'datatable/jquery.dataTables.min.css' %}">
+    <script type="text/javascript" src="{% static 'datatable/jquery.dataTables.min.js' %}"></script>
+
+    <script type="text/javascript" src="{% static 'datatable/bootstable.min.js' %}"></script>
+
+    <script type="text/javascript">
+    
+        $(document).ready(function(){
+
+            $('#table').DataTable();
+        })
+    </script>
+
+    <style>
+        #table{background:lightblue ;color: black}
+        .a{background: lightblue;padding-left: 400px;}
+
+        #buy{background: yellow;}
+        .abc{margin-top: 140px;}
+
+    </style>
+
+  </head>
+
+<body>
+	 {% include 'user_header.html' %}
+
+	<!-- container -->
+	<div class="container abc">
+		<div class="row">
+			
+			<center>
+				<div class="row">
+					<h3>Payment</h3><br><br>
+		
+				</div>
+				<input type="hidden" id="p1" value="{{m_id}}">
+				<input type="hidden" id="p2" value="{{hash_value}}">
+				<input type="hidden" id="p3" value="{{author}}">
+				<input type="hidden" id="p4" value="{{username}}">
+
+							<div id="myD" style="width: 40%;border: 1px solid black;background-color: blanchedalmond;border-radius: 10px;margin-bottom: 100px;"><br><br>
+				
+								<div class="top-margin">
+									<label>Title</label>
+									<input type="text" class="form-control" id="title" value="{{title}}" style="width: 80%; text-align: center;" readonly disabled>
+								</div><br>
+								<div class="top-margin">
+									<label>Price(ETH)</label>
+									<input type="text" class="form-control" id="price" style="width: 40%; text-align: center;" value="1" readonly disabled>
+								</div><br>
+								<div class="top-margin">
+									<label>Enter Private Key<span class="text-danger">*</span></label>
+									<input type="text" class="form-control" id="p_key" style="width: 80%;">
+								</div><br>
+								<div class="top-margin">
+									<img src="{% static 'assets/images/captcha.jpg' %}" height="50" alt="Captcha Here" style="width:40%;">
+								</div><br>
+								<div class="top-margin">
+									<label>Enter above captcha here<span class="text-danger">*</span></label>
+									<input type="text" class="form-control" id="cap" style="width: 40%;">
+								</div><br>
+
+								<div class="top-margin" style="padding-bottom: 50px;">
+								<div class="button" >
+									<button class="btn btn-action" id="btnsin" type="submit">Confirm Payment</button>
+								</div>
+				</div></div>
+
+			  </center>
+
+
+		</div>
+	</div>	<!-- /container -->
+	
+
+	 {% include 'admin_footer.html' %}
+		
+
+
+		<script src="{% static 'vendor/bootstrap/js/bootstrap.min.js' %}"></script>
+
+  	<script src="{% static 'assets/js/custom.js' %}"></script>
+
+
+    <!-- Contact Javascript File -->
+    <script src="{% static 'mail/jqBootstrapValidation.min.js' %}"></script>
+    <script src="{% static 'mail/contact.js' %}"></script>
+    <script src="{% static 'js_1/bootstrap.js' %}"></script>
+    <script src="{% static 'js_1/jquery.dcjqaccordion.2.7.js' %}"></script>
+    <script src="{% static 'js_1/scripts.js' %}"></script>
+    <script src="{% static 'js_1/jquery.slimscroll.js' %}"></script>
+    <script src="{% static 'js_1/jquery.nicescroll.js' %}"></script>
+    <script src="{% static 'js_1/jquery.scrollTo.js' %}"></script>
+
+
+		<script>
+
+			$(document).ready(function() 
+			{
+		
+				$("#btnsin").click(function()
+				{
+	
+					title=$('#title').val()
+					
+					price=$('#price').val()
+					cap=$('#cap').val()
+					p_key=$('#p_key').val()
+
+					m_id=$('#p1').val()
+					author=$('#p3').val()
+					hash_value=$('#p2').val()
+
+					username=$('#p4').val()
+				   
+					if(cap=="" || p_key=="") 
+					{
+						alert("Fill all Fields");
+					}
+					else if(cap!='gGphJD')
+					{
+						alert("Incorrect Captcha")
+					}
+					else
+					{
+
+						$.ajax({
+							url:"/do_payment/",
+							datatype:"json",
+							data:{
+									"title":title,
+									"price":price,
+									"p_key":p_key,
+									"m_id":m_id,
+									"author":author,
+									"hash_value":hash_value,
+									"username":username,
+								},
+								success:function(any)
+								{
+								
+									alert(any)
+									window.location.assign("/display_music_user/");
+								 
+								}
+						});
+					}
+					
+				}); 
+
+
+			});
+	</script>
+
+</body>
+</html>

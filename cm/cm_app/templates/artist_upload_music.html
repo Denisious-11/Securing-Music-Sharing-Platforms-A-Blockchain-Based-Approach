@@ -1,0 +1,77 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+
+    <meta charset="utf-8">
+    <meta name="author" content="templatemo">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
+
+    <title>Upload Music Artist</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="{% static 'vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+
+
+    <!-- Additional CSS Files -->
+    <link rel="stylesheet" href="{% static 'assets/css/fontawesome.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/templatemo-snapx-photography.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/owl.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/animate.css' %}">
+    <link rel="stylesheet"href="https://unpkg.com/swiper@7/swiper-bundle.min.css"/>
+
+    <style>
+        #table{background:lightslategray ;color: black}
+        /*.a{background: lightblue;padding-left: 200px;margin-left: 200px;margin-right: 200px;}*/
+        .a{background-color: lightblue;
+          width: 50%;
+          margin-left: 340px;}
+
+    </style>
+
+  </head>
+
+<body>
+
+
+  <!-- ***** Header Area Start ***** -->
+   {% include 'artist_header.html' %}
+  <!-- ***** Header Area End ***** -->
+
+<div class="container-fluid p-0 mb-5">
+        <h2 style="text-align: center; margin-top:120px;"><u>Upload Music Here</u></h2><br><br>
+       
+        <form class="row contact_us_form" action="{% url 'upload_music' %}" method="post"  enctype='multipart/form-data'>{% csrf_token %}
+           <div class="a"><br><br>
+                <label style="color:black; font-weight: bold; margin-left:130px;" for="f_upload"><b>Choose file:</b></label>
+                <input type="file" name="f_upload" required="" style="margin-left: 55px;" required><br><br>
+
+                <label style="color:black; font-weight: bold; margin-left:130px;" for="private_key" > Private Key :</label>
+                <input  type="text" id="id5" class="form-control" style="width: 250px;margin-left:275px;margin-top:-30px;" placeholder="Enter Private Key " name="private_key"  required><br><br>
+
+               
+                <input type="submit" id="b1" value="Upload" class="btn btn-info" style="margin-left:275px;"><br><br><br>
+            </div>
+        </form>
+    </div>
+  <!-- ***** Main Banner Area End ***** -->
+  <div style="padding-top: 40px;"></div>
+  {% include 'admin_footer.html' %}
+
+  <!-- Scripts -->
+  <!-- Bootstrap core JavaScript -->
+  <script src="{% static 'vendor/jquery/jquery.min.js' %}"></script>
+  <script src="{% static 'vendor/bootstrap/js/bootstrap.min.js' %}"></script>
+
+  <script src="{% static 'assets/js/isotope.min.js' %}"></script>
+  <script src="{% static 'assets/js/owl-carousel.js' %}"></script>
+  <script src="{% static 'assets/js/wow.js' %}"></script>
+  <script src="{% static 'assets/js/tabs.js' %}"></script>
+  <script src="{% static 'assets/js/popup.js' %}"></script>
+  <script src="{% static 'assets/js/custom.js' %}"></script>
+
+  </body>
+</html>
